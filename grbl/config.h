@@ -68,11 +68,11 @@
 #endif
 #if N_AXIS > 3
   #define AXIS_4 3
-  #define AXIS_4_NAME 'A' // Letter of axis number 4
+  #define AXIS_4_NAME 'X' // Letter of axis number 4
 #endif
 #if N_AXIS > 4
   #define AXIS_5 4
-  #define AXIS_5_NAME 'B' // Letter of axis number 5
+  #define AXIS_5_NAME 'Y' // Letter of axis number 5
 #endif
 #if N_AXIS > 5
   #define AXIS_6 5
@@ -175,11 +175,13 @@
     #define HOMING_CYCLE_2 (1<<AXIS_1) // Home X axis
     #define HOMING_CYCLE_3 (1<<AXIS_2) // Home Y axis
   #elif N_AXIS == 5 // 5 axis : homing
-    #define HOMING_CYCLE_0 (1<<AXIS_3) // Home Z axis first to clear workspace.
+    #define HOMING_CYCLE_0 ((1<<AXIS_1)|(1<<AXIS_4)) // Home both X axes
+    #define HOMING_CYCLE_1 ((1<<AXIS_2)|(1<<AXIS_5)) // Home both Y axes
+    /*#define HOMING_CYCLE_0 (1<<AXIS_3) // Home Z axis first to clear workspace.
     #define HOMING_CYCLE_1 (1<<AXIS_4) // Home 4th axis (A)
     #define HOMING_CYCLE_2 (1<<AXIS_5) // Home 5th axis (B)
     #define HOMING_CYCLE_3 (1<<AXIS_1) // Home X axis
-    #define HOMING_CYCLE_4 (1<<AXIS_2) // Home Y axis
+    #define HOMING_CYCLE_4 (1<<AXIS_2) // Home Y axis*/
   #elif N_AXIS == 6 // 6 axis : homing
     #define HOMING_CYCLE_0 (1<<AXIS_3) // Home Z axis first to clear workspace.
     #define HOMING_CYCLE_1 (1<<AXIS_4) // Home 4th axis (A)
@@ -711,6 +713,10 @@
 #define RPM_LINE_A4  1.203413e-01  // Used N_PIECES = 4. A and B constants of line 4.
 #define RPM_LINE_B4  1.151360e+03
 
+
+// Sets an offset to the physical touching of the endstop.
+// This might be useful for squaring up a machine. Mechanically adjusting the endstop should
+// be preferred over this method.
 #define DEFAULT_AXIS_1_ENDSTOP_ADJ 0
 #define DEFAULT_AXIS_2_ENDSTOP_ADJ 0
 #define DEFAULT_AXIS_3_ENDSTOP_ADJ 0
